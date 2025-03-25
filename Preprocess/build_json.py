@@ -8,7 +8,6 @@ Functions:
     build_insurance_json(): Processes insurance markdown files and creates a JSON document.
     build_faq_json(): Processes FAQ data and creates a JSON document.
 """
-
 import json
 import os
 import re
