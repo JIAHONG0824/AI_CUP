@@ -28,7 +28,7 @@ from transformers import AutoModel
 sys.modules["sqlite3"] = sys.modules.pop("pysqlite3")
 
 # 使用本地 embeddings 模型目錄
-embedding_model_name = "../local_models/jina-embeddings-v3"
+embedding_model_name = "jinaai/jina-embeddings-v3"
 
 # 加載嵌入模型，並將其移至 GPU（如果可用）
 embedding_model = AutoModel.from_pretrained(
@@ -76,7 +76,7 @@ def indexing(index_name):
     embeddings = []
 
     # 生成嵌入（批量處理，每200條文本一批）
-    for i in range(0, len(texts), 200):
+    for i in tqdm(range(0, len(texts), 200)):
         batch_texts = texts[i : i + 200]
         batch_embeddings = embedding_model.encode(batch_texts, task="retrieval.passage")
         embeddings.extend(batch_embeddings)
